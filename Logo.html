@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Face-In Logo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f9f9f9;
+      margin: 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .icon {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      border: 4px solid #00352C; /* Dark teal color */
+      border-radius: 15px;
+      box-sizing: border-box;
+    }
+
+    /* Horizontal Lines */
+    .line {
+      position: absolute;
+      height: 10px;
+      background-color: #00352C; /* Dark teal color */
+      border-radius: 5px;
+      left: 0; /* Attached to box */
+      right: 0; /* Full width */
+    }
+
+    .line1 {
+      top: 40%; /* Position the first line */
+    }
+
+    .line2 {
+      top: 55%; /* Position the second line */
+    }
+
+    /* Head (circle) */
+    .head {
+      position: absolute;
+      top: 25%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 40px;
+      background-color: #C2B89B; /* Beige */
+      border-radius: 50%;
+      z-index: 2; /* Place above lines */
+    }
+
+    /* Body (rectangle) */
+    .body {
+      position: absolute;
+      bottom: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 30px;
+      background-color: #C2B89B; /* Beige */
+      border-radius: 8px;
+      z-index: 2; /* Place above lines */
+    }
+
+    /* Text */
+    .text {
+      font-size: 28px;
+      color: #00352C; /* Dark teal color */
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">
+    <div class="icon">
+      <div class="line line1"></div>
+      <div class="line line2"></div>
+      <div class="head"></div>
+      <div class="body"></div>
+    </div>
+    <span class="text">Face-In</span>
+  </div>
+</body>
+</html>

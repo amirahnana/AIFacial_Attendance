@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<USERS>
+  <USER>
+    <USERNAME>ADMIN</USERNAME>
+    <PASSWORD>sa12345A</PASSWORD>
+    <TYPE>admin</TYPE>
+  </USER>
+  <USER>
+    <USERNAME>coordinator1</USERNAME>
+    <PASSWORD>c123456G</PASSWORD>
+    <TYPE>group_coordinator</TYPE>
+ </USER>
+ <USER>
+    <USERNAME>Lecturer1</USERNAME>
+    <PASSWORD>a112233A</PASSWORD>
+    <TYPE>lecturer</TYPE>
+  </USER>
+  <USER>
+    <USERNAME>lecturer2</USERNAME>
+    <PASSWORD>a223344A</PASSWORD>
+    <TYPE>lecturer</TYPE>
+  </USER>
+  <USER>
+    <USERNAME>john.doe</USERNAME>
+    <PASSWORD>j789654D</PASSWORD>
+    <TYPE>student</TYPE>
+  </USER>
+  <USER>
+    <USERNAME>jane.smith</USERNAME>
+    <PASSWORD>s123456J</PASSWORD>
+    <TYPE>student</TYPE>
+  </USER>
+  <USER>
+    <USERNAME>brenda.brown</USERNAME>
+    <PASSWORD>b741258R</PASSWORD>
+    <TYPE>student</TYPE>
+  </USER>
+  <USER>
+    <USERNAME>tony.ian</USERNAME>
+    <PASSWORD>t753159Y</PASSWORD>
+    <TYPE>student</TYPE>
+  </USER>
+</USERS>
