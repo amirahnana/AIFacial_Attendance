@@ -1,42 +1,35 @@
 <?php
-// Check_Login.php
 
 session_start();
 
-// Configurations
 $allowed_attempts = 3;
-$lockout_duration = 300; // 5 minutes in seconds
+$lockout_duration = 300; 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $role = $_POST['role']; // Capture role from dropdown
+    $role = $_POST['role']; 
 
-    // Initialize login attempts if not set
     if (!isset($_SESSION['login_attempts'])) {
         $_SESSION['login_attempts'] = 0;
     }
 
-    // Check if the user is locked out
     if (isset($_SESSION['lockout_time']) && (time() < $_SESSION['lockout_time'])) {
         $remaining_time = ($_SESSION['lockout_time'] - time()) / 60;
         echo "<script>alert('You are locked out. Please try again in " . ceil($remaining_time) . " minutes or contact the Face-In team for further assistance.'); window.location.href='login.php';</script>";
         exit();
     }
 
-    // Load XML file
     $xml = simplexml_load_file("users.xml") or die("Error: Cannot load users.xml file.");
 
-    // Validate credentials
     $authenticated = false;
     foreach ($xml->USER as $user) {
         if ($user->USERNAME == $username && $user->PASSWORD == $password && $user->TYPE == $role) {
             $authenticated = true;
             $_SESSION['username'] = (string)$user->USERNAME;
             $_SESSION['role'] = (string)$user->TYPE;
-            $_SESSION['login_attempts'] = 0; // Reset attempts on successful login
+            $_SESSION['login_attempts'] = 0; 
 
-            // Redirect based on user type
             if ($user->TYPE == "admin") {
                 header("Location: admin.php");
             } elseif ($user->TYPE == "group_coordinator") {
@@ -50,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // Handle invalid credentials
     if (!$authenticated) {
         $_SESSION['login_attempts']++;
 
