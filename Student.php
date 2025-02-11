@@ -1,4 +1,21 @@
-<html>
+<?php
+session_start();
+if ($_SESSION['role'] !== 'student') {
+    header("Location: login.php");
+    exit();
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, Student!</h1>
+    <p>Student functionalities here.</p>
+    <a href="logout.php">Logout</a>
+    <html>
 <head>
     <title>Face-in</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
@@ -153,5 +170,6 @@
             </div>
         </div>
     </div>
+
 </body>
 </html>
