@@ -10,6 +10,7 @@ $lockout_duration = 300; // 5 minutes in seconds
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $role = $_POST['role']; // Capture role from dropdown
 
     // Initialize login attempts if not set
     if (!isset($_SESSION['login_attempts'])) {
@@ -29,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Validate credentials
     $authenticated = false;
     foreach ($xml->USER as $user) {
-        if ($user->USERNAME == $username && $user->PASSWORD == $password) {
+        if ($user->USERNAME == $username && $user->PASSWORD == $password && $user->TYPE == $role) {
             $authenticated = true;
             $_SESSION['username'] = (string)$user->USERNAME;
             $_SESSION['role'] = (string)$user->TYPE;
@@ -37,13 +38,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             // Redirect based on user type
             if ($user->TYPE == "admin") {
-                header("Location: superadmin.php");
+                header("Location: admin.php");
+            } elseif ($user->TYPE == "group_coordinator") {
+                header("Location: group_coordinator.php");
             } elseif ($user->TYPE == "lecturer") {
                 header("Location: lecturer.php");
             } elseif ($user->TYPE == "student") {
                 header("Location: student.php");
-            } elseif ($user->TYPE == "group_coordinator") {
-                header("Location: group_coordinator.php");
             }
             exit();
         }
@@ -58,14 +59,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "<script>alert('Too many failed attempts. Please wait 5 minutes or contact the Face-In team for assistance.'); window.location.href='login.php';</script>";
         } else {
             $remaining_attempts = $allowed_attempts - $_SESSION['login_attempts'];
-            echo "<script>alert('Invalid username or password! You have " . $remaining_attempts . " attempts remaining.'); window.location.href='login.php';</script>";
+            echo "<script>alert('Invalid username, password, or role! You have " . $remaining_attempts . " attempts remaining.'); window.location.href='login.php';</script>";
         }
         exit();
     }
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -109,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             margin-bottom: 5px;
             color: white;
         }
-        input {
+        input, select {
             width: 94%;
             padding: 10px;
             border: none;
@@ -148,6 +147,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" name="password" id="password" required>
+        </div>
+        <div class="form-group">
+            <label for="role">Role</label>
+            <select name="role" id="role" required>
+                <option value="">Select Role</option>
+                <option value="admin">Admin</option>
+                <option value="group_coordinator">Group Coordinator</option>
+                <option value="lecturer">Lecturer</option>
+                <option value="student">Student</option>
+            </select>
         </div>
         <button type="submit" class="btn">Login</button>
     </form>
